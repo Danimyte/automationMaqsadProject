@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import java.net.URL;
 import java.net.MalformedURLException;
+import org.testng.annotations.Test;
+
 
 public class otpVerify {
     static AppiumDriver<MobileElement> driver;
@@ -21,13 +23,13 @@ public class otpVerify {
         }
     }
 
+    @Test
     public static void appLogin() throws MalformedURLException, InterruptedException {
 
         DesiredCapabilities cap = new DesiredCapabilities();
         cap.setCapability("deviceName","emulator-5554");
         cap.setCapability("platformName","Android");
         cap.setCapability("platformVersion","13");
-
         cap.setCapability("appPackage","io.maqsad.dev");
         cap.setCapability("appActivity","io.maqsad.activities.SplashScreenActivity");
         AndroidDriver<MobileElement> driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"),cap);
