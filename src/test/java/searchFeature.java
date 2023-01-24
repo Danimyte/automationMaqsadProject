@@ -9,14 +9,14 @@ import org.testng.annotations.Test;
 import java.net.URL;
 import java.net.MalformedURLException;
 
-public class otpVerify {
+public class searchFeature {
     static AppiumDriver<MobileElement> driver;
 
 
     @Test
     public static void main(String[] args) {
         try {
-            appLogin();
+            searchResults();
         }
         catch (Exception exp)
         {
@@ -26,29 +26,29 @@ public class otpVerify {
         }
     }
     @Test
-    public static void appLogin() throws MalformedURLException, InterruptedException {
+    public static void searchResults() throws MalformedURLException, InterruptedException {
 
         DesiredCapabilities cap = new DesiredCapabilities();
         cap.setCapability("deviceName","adb-07472371AP002184-AoCydz._adb-tls-connect._tcp");
         cap.setCapability("platformName","Android");
         cap.setCapability("platformVersion","11");
 
-        cap.setCapability("appPackage","io.maqsad.dev");
+        cap.setCapability("appPackage","io.maqsad");
         cap.setCapability("appActivity","io.maqsad.activities.SplashScreenActivity");
         AndroidDriver<MobileElement> driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"),cap);
 
 
         Thread.sleep(1000);
 
-        MobileElement getStarted = driver.findElement(By.id("io.maqsad.dev:id/getStartedButton"));
+        MobileElement getStarted = driver.findElement(By.id("io.maqsad:id/getStartedButton"));
         getStarted.click();
 
         Thread.sleep(3000);
 
-        MobileElement phoneNo = driver.findElement(By.id("io.maqsad.dev:id/phoneNumberField"));
+        MobileElement phoneNo = driver.findElement(By.id("io.maqsad:id/phoneNumberField"));
         phoneNo.sendKeys("3012692034");
 
-        MobileElement submitPhone =driver.findElement(By.id("io.maqsad.dev:id/signInButton"));
+        MobileElement submitPhone =driver.findElement(By.id("io.maqsad:id/signInButton"));
         submitPhone.click();
 
         /*
@@ -68,25 +68,25 @@ public class otpVerify {
         wheelAcceptance.click();
 */
 
-        Thread.sleep(20000);
+        Thread.sleep(15000);
 
-        MobileElement closeBanner = driver.findElement(By.className("android.view.View"));
-        closeBanner.click();
+        MobileElement lecturesTab = driver.findElement(By.xpath("//android.widget.FrameLayout[@content-desc=\"Lectures\"]/android.widget.FrameLayout/android.widget.ImageView"));
+        lecturesTab.click();
 
-        // Thread.sleep(000);
+        Thread.sleep(2000);
 
-        MobileElement dsBtn = driver.findElement(By.id("io.maqsad.dev:id/navigation_bar_item_large_label_view"));
-        Assert.assertEquals(true, dsBtn.isDisplayed());
+        MobileElement searchIcon = driver.findElement(By.id("io.maqsad:id/searchIcon"));
+        searchIcon.click();
 
-        /*
-        if(driver.getPageSource().contains("Tests")){
-            System.out.println("Text is present");
-        }
-        else
-        {
-            System.out.println("Text is absent");
-        }
-*/
+        Thread.sleep(2000);
+        MobileElement searchNow = driver.findElement(By.id("io.maqsad:id/searchEditText"));
+        searchNow.sendKeys("biology");
+
+        Thread.sleep(3500);
+
+        String pageSource = driver.getPageSource();
+
+        Assert.assertTrue(pageSource.contains("physics"));
 
     }
 
